@@ -1,0 +1,98 @@
+<html>
+    <body>
+        <form onsubmit="saveToLocalStorage(event)">
+            <label>selling price</label>
+            <input id="selling price"  type="text"   name="selling price"  required/>
+            <label>product name</label>
+            <input id="product name"   type="text"   name="product name"   required/>
+            <button>add product</button><br><br>
+
+            <h1>products</h1>
+            <h5>total value worth of products: price of product in rs</h5>
+        
+        </form>
+        <ul id="ListOFproducts"></ul>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+        <script>
+            function saveToLocalStorage(event){
+                event.preventDefault();
+                const price-event.target.sellingprice.value;
+                const name-event.target.prosuctname.value;
+                const obj={
+                    selling price;
+                    product name;
+
+            
+                }
+                axios.post("https://crudcrud.com/api/8e6cbc960e9d4b1cadea73643c6ee009",obj)
+                .then((response) => {
+                    showNewSellingpriceOnScreen(response.data)
+                    console.log(response)
+                })
+                .catch((err) => {
+                    document.body.innerHTML=document.body.innerHTML="<h4>something went wrong</h4>"
+                    console.log(err)
+                })
+
+                localStorage.setItem(obj.email, JSON.stringify(obj))
+                showNewSellingpriceOnScreen(obj)
+
+
+                window.addEventLister("DOMContentLoaded", () => {
+                    axios.get("https://reqres.in/api/users?page=2")
+                    .then((response) => {
+                        console.log(response)
+                        for(vari=0;i<response.data.length;i++){
+                            showNewSellingpriceOnScreen(response.data[i])
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+                    function showNewSellingpriceOnScreen(sellingprice){
+                        sellingprice={
+                            sellingprice: '',
+                            product name: '',
+                        }
+                        document.getElementById('sellingprice').value='';
+                        document.getElementById('productname').value='';
+
+                        if(localStoragr.getItem(sellingprice.productname) !==null ){
+                            removeSellingpriceFromScreen(sellingprice.productname)
+                        }
+
+                        const parentNode=document.getElementById('listofProducts');
+                        
+                    }
+                    function editproductDetails(sellingprice, productname){
+                        document.getElementById('sellingprice').value='sellingprice';
+                        document.getElementById('productname').value='productname';
+                        deleteproduct(sellingprice)
+                    }
+
+                    function deleteproduct(sellingprice){
+                        axios.delete(' https://reqres.in/api/users/26/${sellingprice}       ')
+                        .then((response) => {
+                            removeSellingpriceFromScreen(sellingprice)
+                        })
+                    }
+
+
+                    function removeSellingpriceFromScreen(sellingprice){
+                        const parentNode=document.getElementById('ListOfproducts');
+                        const childNodeToBeDeleted=document.getElementById('sellingprice');
+                        if(childNodeToBeDeleted){
+                            parentNode.removeChild(childNodeToBeDeleted)
+                        }
+                    }
+
+
+
+
+
+                })
+                
+            }
+        </script>
+    </body>
+</html>
